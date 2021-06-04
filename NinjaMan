@@ -41,8 +41,8 @@
             background-image: url('Images/ninja.gif');
             background-size: contain; /* conains within the element */
             position: absolute;
-            left: 40px;
-            top: 40px;
+            /* left: 40px;
+            top: 40px; */
         }
     </style>
 </head>
@@ -57,10 +57,10 @@
         [1,0,2,2,1],
         [1,2,1,2,1],
         [1,2,2,2,1],
-        [1,1,2,2,1],
+        [1,2,2,2,1],
         [1,2,1,2,1],
         [1,2,2,2,1],
-        [1,1,2,2,1],
+        [1,2,2,2,1],
         [1,2,1,2,1],
         [1,2,2,2,1],
         [1,1,1,1,1],
@@ -83,6 +83,47 @@
         document.getElementById('world').innerHTML = output;
     }
     drawWorld();
+
+    var ninjaman = {
+        x: 1,
+        y: 1
+    }
+
+    function drawNinjaman(){
+        document.getElementById('ninjaman').style.top = ninjaman.y * 40 + 'px';
+
+        document.getElementById('ninjaman').style.left = ninjaman.x * 40 + 'px';
+
+    }
+
+    drawNinjaman();
+
+    document.onkeydown = function(e){
+        /* if the coordinate is not wall*/
+        if(e.keyCode == 37){
+            if(world[ninjaman.y][ninjaman.x - 1] != 1){
+                ninjaman.x--;
+            }
+        }
+        if(e.keyCode == 39){
+            if(world[ninjaman.y][ninjaman.x + 1] != 1){
+                ninjaman.x++;
+            }
+        }
+        if(e.keyCode == 38){
+            if(world[ninjaman.y - 1][ninjaman.x ] != 1){
+                ninjaman.y--;
+            }
+        }
+        if(e.keyCode == 40){
+            if(world[ninjaman.y + 1][ninjaman.x] != 1){
+                ninjaman.y++;
+            }
+        }
+        world[ninjaman.y][ninjaman.x] = 0;
+        drawWorld();
+        drawNinjaman();
+    }
 
 </script>
 </html>
