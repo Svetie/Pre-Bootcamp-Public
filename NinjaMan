@@ -27,6 +27,14 @@
             background-image: url('Images/sushi.png');
             background-size: contain; /* conains within the element */
         }
+        .onigiri {
+            background-color: black;
+            height: 40px;
+            width: 40px;
+            display: inline-block;  /* makes it look like squares */
+            background-image: url('Images/onigiri.png');
+            background-size: contain; /* conains within the element */
+        }
         .blank {
             background-color: black;
             height: 40px;
@@ -47,9 +55,9 @@
     </style>
 </head>
 <body>
-   
     <div id='world'></div>
     <div id='ninjaman'></div>
+    
 </body>
 <script type='text/javascript'>
     var world = [
@@ -59,16 +67,67 @@
         [1,2,2,2,1],
         [1,2,2,2,1],
         [1,2,1,2,1],
-        [1,2,2,2,1],
+        [1,3,2,3,1],
         [1,2,2,2,1],
         [1,2,1,2,1],
-        [1,2,2,2,1],
-        [1,1,1,1,1],
+        [1,3,2,3,1],
+        [1,1,1,1,1]
     ];
+
+    var world1 = [
+        [1,1,1,1,1,1,1,1],
+        [1,0,2,2,2,3,2,1],
+        [1,2,1,2,1,1,2,1],
+        [1,2,1,2,3,1,3,1],
+        [1,2,2,2,2,1,2,1],
+        [1,2,1,2,1,1,3,1],
+        [1,3,1,3,3,2,3,1],
+        [1,1,1,1,1,1,1,1]
+    ];
+
+    var world2 = [
+        [1,1,1,1,1,1,1,1],
+        [1,0,2,2,2,3,2,1],
+        [1,2,1,2,1,1,2,1],
+        [1,2,1,2,3,1,3,1],
+        [1,2,2,2,2,1,2,1],
+        [1,2,1,2,1,1,3,1],
+        [1,3,1,3,3,2,3,1],
+        [1,3,1,2,2,1,2,1],
+        [1,1,1,1,1,1,1,1]
+    ];
+
+    var world3 = [
+        [1,1,1,1,1,1,1,1,1,1],
+        [1,0,2,2,2,3,2,3,1,1],
+        [1,2,1,2,1,1,2,2,2,1],
+        [1,2,1,2,3,1,3,3,3,1],
+        [1,2,2,2,2,1,1,1,3,1],
+        [1,2,1,2,1,1,3,3,3,1],
+        [1,3,1,3,3,2,3,1,2,1],
+        [1,3,1,2,2,1,2,1,2,1],
+        [1,1,1,1,1,1,1,1,1,1]
+    ];
+
+    var random = Math.floor((Math.random() * 4));
+    console.log('random = ', random)
+    switch (random) {
+        case 1:
+            world = world1;
+            break;
+        case 2:
+            world = world2;
+            break;
+        case 3:
+            world = world3;
+            break;
+    }
+
     var worldDict = {
         0: 'blank',
         1: 'wall',
-        2: 'sushi'
+        2: 'sushi',
+        3: 'onigiri'
     };
     function drawWorld(){
         output = "";
@@ -120,9 +179,25 @@
                 ninjaman.y++;
             }
         }
-        world[ninjaman.y][ninjaman.x] = 0;
+        var sushiNum = 0;
+        var onigiriNum = 0;
+        if(world[ninjaman.y][ninjaman.x] == 2){
+            world[ninjaman.y][ninjaman.x] = 0;
+            sushiNum++;
+            console.log('sushi eaten:',sushiNum);
+        }
+        if(world[ninjaman.y][ninjaman.x] == 3){
+            world[ninjaman.y][ninjaman.x] = 0;
+            onigiriNum++;
+            console.log('onigiri eaten:',onigiriNum);
+        }
         drawWorld();
         drawNinjaman();
+
+        p = document.createElement("p");
+        p.innerHTML = sushiNum;
+        document.body.appendChild(p);
+
     }
 
 </script>
