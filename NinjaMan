@@ -10,6 +10,11 @@
             margin: 0;
             padding: 0;
         }
+        div {
+            height: 100%;
+            width: 100%;
+            overflow:hidden;
+        }
         .row {
             line-height: 0;
         }
@@ -47,7 +52,7 @@
             width: 40px;
             display: inline-block;  /* makes it look like squares */
             background-image: url('Images/ninja.gif');
-            background-size: contain; /* conains within the element */
+            background-size: contain; /* contains within the element */
             position: absolute;
             /* left: 40px;
             top: 40px; */
@@ -57,7 +62,8 @@
 <body>
     <div id='world'></div>
     <div id='ninjaman'></div>
-    
+    <div id="score">You have eaten that many sushi</div>
+    <div id='sushiScore'>0</div>
 </body>
 <script type='text/javascript'>
     var world = [
@@ -156,7 +162,14 @@
     }
 
     drawNinjaman();
+    
+    let sushiNum = document.getElementById('#sushiScore');
 
+    function displayScore(){
+        document.getElementById('sushiScore').innerHTML = sushiNum;
+    }
+
+    displayScore();
     document.onkeydown = function(e){
         /* if the coordinate is not wall*/
         if(e.keyCode == 37){
@@ -179,11 +192,12 @@
                 ninjaman.y++;
             }
         }
-        var sushiNum = 0;
-        var onigiriNum = 0;
+        // let sushiNum = document.getElementById('#sushiScore');
+        let onigiriNum = 0;
         if(world[ninjaman.y][ninjaman.x] == 2){
             world[ninjaman.y][ninjaman.x] = 0;
             sushiNum++;
+            displayScore();
             console.log('sushi eaten:',sushiNum);
         }
         if(world[ninjaman.y][ninjaman.x] == 3){
@@ -193,11 +207,6 @@
         }
         drawWorld();
         drawNinjaman();
-
-        p = document.createElement("p");
-        p.innerHTML = sushiNum;
-        document.body.appendChild(p);
-
     }
 
 </script>
