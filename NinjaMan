@@ -64,6 +64,8 @@
     <div id='ninjaman'></div>
     <div id="score">You have eaten that many sushi</div>
     <div id='sushiScore'>0</div>
+    <div id='oni'>You have eaten that many onigiri</div>
+    <div id='onigiriScore'>0</div>
 </body>
 <script type='text/javascript'>
     var world = [
@@ -164,9 +166,11 @@
     drawNinjaman();
     
     let sushiNum = document.getElementById('#sushiScore');
+    let onigiriNum = document.getElementById('#onigiriScore');
 
     function displayScore(){
         document.getElementById('sushiScore').innerHTML = sushiNum;
+        document.getElementById('onigiriScore').innerHTML = onigiriNum;
     }
 
     displayScore();
